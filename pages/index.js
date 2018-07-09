@@ -1,15 +1,22 @@
-// This is the Link API
-import Link from 'next/link'
+import Layout from "../comps/MyLayout"
+import Link from "next/link"
 
-
-const Index = () => (
-	<div>
-		<Link prefetch href={{ pathname: "/about", query: { key: "value"} }}>
-			<button>Go to About Page</button>
+const PostLink = (props) => (
+	<li>
+		<Link as={`/p/${props.id}`} href={`/post?title=${props.title}`}>
+			<a>{props.title}</a>
 		</Link>
-		<p>Hello Next.js</p>
-	</div>
+	</li>
 )
 
-export default Index
-
+export default () => (
+	<Layout>
+		<h1>My Wines</h1>
+		<ul>
+			<PostLink id="cab-sav" title="Cab Sav"/>
+			<PostLink id="merlot" title="Merlot"/>
+			<PostLink id="pinot-niore" title="Pinot Niore"/>
+		</ul>
+		<p>Hello Next.js</p>
+	</Layout>
+)
