@@ -6,6 +6,8 @@ const dev = process.env.NODE_ENV !== "production"
 const app = next({dev})
 const handle = app.getRequestHandler()
 
+const wineRoutes = require("./routes/wines")
+
 app.prepare()
 .then(() => {
   const server = express()
@@ -19,6 +21,8 @@ app.prepare()
   server.get("*", (req, res) => {
     return handle(req, res)
   })
+
+  server.use("/wines", wineRoutes)
 
   server.listen(port, (err) => {
     if(err) throw err
